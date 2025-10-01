@@ -12,6 +12,40 @@ namespace PhotoSelectApi.Services
             _photoRepository = photoRepository;
         }
 
+        public PhotoDTO AddPhoto(PhotoDTO photoDTO)
+        {
+            if(photoDTO == null)
+            {
+                throw new ArgumentNullException(nameof(photoDTO));
+            }
+
+            if(photoDTO.UserId == Guid.Empty)
+            {
+                throw new ArgumentException("UserID cannot be empty.");
+            }
+
+            Photo photo = new Photo
+            {
+                PhotoID = Guid.NewGuid(),
+                UserID = photoDTO.UserId,
+                Url = photoDTO.Url,
+                Description = photoDTO.Description,
+                Title = "",
+                DateUploaded = DateTime.UtcNow,
+                DateUpdated = DateTime.UtcNow
+            };
+
+            Photo createdPhoto = _photoRepository.AddPhoto(photo);
+
+            return new PhotoDTO
+            {
+                Id = createdPhoto.PhotoID,
+                UserId = createdPhoto.UserID,
+                Url = createdPhoto.Url,
+                Description = createdPhoto.Description
+            };
+        }
+
         public PhotoDTO GetPhoto(Guid photoID)
         {
             Photo foundPhoto = _photoRepository.GetPhotoByID(photoID);

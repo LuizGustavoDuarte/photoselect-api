@@ -1,4 +1,5 @@
-﻿using PhotoSelectApi.Entities;
+﻿using PhotoSelectApi.DTOs;
+using PhotoSelectApi.Entities;
 
 namespace PhotoSelectApi.Repositories
 {
@@ -6,5 +7,6 @@ namespace PhotoSelectApi.Repositories
     {
         IEnumerable<Photo> GetPhotosByUserID(Guid userID);
         Photo GetPhotoByID(Guid photoID);
+        Photo AddPhoto(Photo photo);
     }
 }

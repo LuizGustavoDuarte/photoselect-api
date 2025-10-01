@@ -31,6 +31,19 @@ namespace PhotoSelectApi.Controllers
             return Ok(responsePhotos);
         }
 
+        [HttpPost]
+        public IActionResult GetUserPhotos([FromBody] PhotoDTO photoDTO)
+        {
+            PhotoDTO responsePhoto = _photoService.AddPhoto(photoDTO);
+
+            if (responsePhoto == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(responsePhoto);
+        }
+
         [HttpGet("/{photoID}/")]
         public IActionResult GetPhoto(Guid photoID)
         {

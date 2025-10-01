@@ -6,5 +6,6 @@
     {
         IEnumerable<PhotoDTO> GetUserPhotos(Guid userID);
         PhotoDTO GetPhoto(Guid photoID);
+        PhotoDTO AddPhoto(PhotoDTO photoDTO);
     }
 }
